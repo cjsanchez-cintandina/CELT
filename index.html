@@ -284,7 +284,7 @@ a.boton:hover {
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-if (id) { 
+if (id) {
   const scriptURL = "https://script.google.com/macros/s/AKfycbxnFGCN6rJvLbsm9IP_GkgaNSVhdMYlOgONvZFaQaRCPWChyS0veNSImiZQrPWqpJtmJA/exec"; 
 
   fetch(`${scriptURL}?id=${id}`)
@@ -292,7 +292,6 @@ if (id) {
     .then(data => {
       if (data.error) { alert(data.error); return; }
 
-      // WhatsApp
       if (data.celular) {
         const celularStr = data.celular.toString().replace(/\D/g,'');
         const btnWhatsapp = document.getElementById("btn-whatsapp");
@@ -300,14 +299,13 @@ if (id) {
         btnWhatsapp.classList.remove("disabled");
       }
 
-      // Formulario
       if (data.correo_electronico) {
         const btnFormulario = document.getElementById("btn-formulario");
         btnFormulario.href = `https://cathsanchez6.github.io/PruebaEntrega_QREstatico/?id=${id}&correo=${data.correo_electronico}`;
         btnFormulario.classList.remove("disabled");
       }
-    })
-     // Agregar evento de loader a ambos botones
+
+      // Agregar evento de loader a ambos botones
       document.querySelectorAll("a.boton").forEach(btn => {
         if (!btn.classList.contains("disabled")) {
           btn.addEventListener("click", function(e) {
@@ -325,13 +323,15 @@ if (id) {
     .catch(err => console.error("Error cargando datos:", err));
 }
 
-// Botón para cancelar y recargar la página
+ // Botón para cancelar y recargar la página
   document.getElementById("cancel-loader").addEventListener("click", () => {
     document.getElementById("loader").style.display = "none";
+    location.reload(); // refresca la página
   });
 </script>
 </body>
 </html>
+
 
 
 
