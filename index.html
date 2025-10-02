@@ -246,14 +246,14 @@ if (id) {
     .then(data => {
       if (data.error) { alert(data.error); return; }
 
-      if (data.Celular) {
-        const celularStr = data.Celular.toString().replace(/\D/g,'');
+      if (data.celular) {
+        const celularStr = data.celular.toString().replace(/\D/g,'');
         const btnWhatsapp = document.getElementById("btn-whatsapp");
         btnWhatsapp.href = `https://wa.me/57${celularStr}?text=Hola, necesito ayuda con un pedido`;
         btnWhatsapp.classList.remove("disabled");
       }
 
-      if (data.Correo_Electronico) {
+      if (data.correo_electronico) {
         const btnFormulario = document.getElementById("btn-formulario");
         btnFormulario.href = `https://cathsanchez6.github.io/PruebaEntrega_QREstatico/?id=${id}&correo=${data.correo_electronico}`;
         btnFormulario.classList.remove("disabled");
@@ -281,6 +281,7 @@ document.getElementById("cancel-loader").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
