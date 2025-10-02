@@ -302,7 +302,7 @@ if (id) {
 
         btnWhatsapp.addEventListener("click", function(e) {
           e.preventDefault();
-          loader.style.display = "flex"; // mostrar loader solo al click
+          
           const link = this.href;
           setTimeout(() => window.location.href = link, 1000);
         });
@@ -316,7 +316,6 @@ if (id) {
 
         btnFormulario.addEventListener("click", function(e) {
           e.preventDefault();
-          loader.style.display = "flex"; // mostrar loader solo al click
           const link = this.href;
           setTimeout(() => window.location.href = link, 1000);
         });
@@ -332,6 +331,7 @@ document.getElementById("cancel-loader").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
