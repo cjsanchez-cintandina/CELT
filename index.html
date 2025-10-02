@@ -287,14 +287,11 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 if (id) {
-  loader.style.display = "flex"; 
- 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxnFGCN6rJvLbsm9IP_GkgaNSVhdMYlOgONvZFaQaRCPWChyS0veNSImiZQrPWqpJtmJA/exec"; 
 
   fetch(`${scriptURL}?id=${id}`)
     .then(res => res.json())
     .then(data => {
-      loader.style.display = "none";
       if (data.error) { alert(data.error); return; }
 
       // WhatsApp
@@ -304,7 +301,7 @@ if (id) {
         btnWhatsapp.href = `https://wa.me/57${celularStr}?text=Hola, necesito ayuda con un pedido`;
         btnWhatsapp.classList.remove("disabled");
 
-        // Listener activado solo después de desbloquear
+        // Mostrar loader solo al presionar
         btnWhatsapp.addEventListener("click", function(e) {
           e.preventDefault();
           loader.style.display = "flex";
@@ -319,7 +316,6 @@ if (id) {
         btnFormulario.href = `https://cathsanchez6.github.io/PruebaEntrega_QREstatico/?id=${id}&correo=${data.correo_electronico}`;
         btnFormulario.classList.remove("disabled");
 
-        // Listener activado solo después de desbloquear
         btnFormulario.addEventListener("click", function(e) {
           e.preventDefault();
           loader.style.display = "flex";
@@ -329,18 +325,19 @@ if (id) {
       }
     })
     .catch(err => {
-       loader.style.display = "none"; // ocultar loader si hay error
        console.error("Error cargando datos:", err);
      });
 }
 
 // Cerrar loader con X
-   document.getElementById("cancel-loader").addEventListener("click", () => {
+document.getElementById("cancel-loader").addEventListener("click", () => {
   loader.style.display = "none";
 });
+
 </script>
 </body>
 </html>
+
 
 
 
