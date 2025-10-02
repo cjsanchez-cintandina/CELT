@@ -287,11 +287,14 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 if (id) {
+  loader.style.display = "flex"; 
+ 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxnFGCN6rJvLbsm9IP_GkgaNSVhdMYlOgONvZFaQaRCPWChyS0veNSImiZQrPWqpJtmJA/exec"; 
 
   fetch(`${scriptURL}?id=${id}`)
     .then(res => res.json())
     .then(data => {
+      loader.style.display = "none";
       if (data.error) { alert(data.error); return; }
 
       // WhatsApp
@@ -325,16 +328,20 @@ if (id) {
         });
       }
     })
-    .catch(err => console.error("Error cargando datos:", err));
+    .catch(err => {
+       loader.style.display = "none"; // ocultar loader si hay error
+       console.error("Error cargando datos:", err);
+     });
 }
 
 // Cerrar loader con X
-document.getElementById("cancel-loader").addEventListener("click", () => {
+   document.getElementById("cancel-loader").addEventListener("click", () => {
   loader.style.display = "none";
 });
 </script>
 </body>
 </html>
+
 
 
 
