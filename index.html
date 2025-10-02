@@ -241,10 +241,9 @@ a.boton:hover {
 </style>
 </head>
 <body>
-
-<div class="contenedor-marco2">
-  <div class="texto-justificado">Bienvenido(a)</div>
-</div>
+   <div class="contenedor-marco2">
+     <div class="texto-justificado">Bienvenido(a)</div>
+   </div>
 
 <div class="contenedor-principal">
   <div class="logo">
@@ -283,7 +282,6 @@ a.boton:hover {
 </div>
 
 <script>
-const loader = document.getElementById("loader");
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
@@ -295,49 +293,43 @@ if (id) {
     .then(data => {
       if (data.error) { alert(data.error); return; }
 
-      // WhatsApp
       if (data.celular) {
         const celularStr = data.celular.toString().replace(/\D/g,'');
         const btnWhatsapp = document.getElementById("btn-whatsapp");
         btnWhatsapp.href = `https://wa.me/57${celularStr}?text=Hola, necesito ayuda con un pedido`;
         btnWhatsapp.classList.remove("disabled");
-
-        btnWhatsapp.addEventListener("click", function(e) {
-          e.preventDefault();
-          loader.style.display = "flex";
-          const link = btnWhatsapp.getAttribute("href");
-          setTimeout(() => window.location.href = link, 1000);
-        });
       }
 
-      // Formulario
       if (data.correo_electronico) {
         const btnFormulario = document.getElementById("btn-formulario");
         btnFormulario.href = `https://cathsanchez6.github.io/PruebaEntrega_QREstatico/?id=${id}&correo=${data.correo_electronico}`;
         btnFormulario.classList.remove("disabled");
-
-        btnFormulario.addEventListener("click", function(e) {
-          e.preventDefault();
-          loader.style.display = "flex";
-          const link = btnFormulario.getAttribute("href");
-          setTimeout(() => window.location.href = link, 1000);
-        });
       }
+
+      // Evento loader para ambos botones
+      document.querySelectorAll("a.boton").forEach(btn => {
+        if (!btn.classList.contains("disabled")) {
+          btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const loader = document.getElementById("loader");
+            loader.style.display = "flex";
+            const link = btn.getAttribute("href");
+            setTimeout(() => {
+              window.location.href = link;
+            }, 1000);
+          });
+        }
+      });
     })
     .catch(err => console.error("Error cargando datos:", err));
 }
 
-// Cerrar loader con X
+// Botón para cerrar loader sin recargar
 document.getElementById("cancel-loader").addEventListener("click", () => {
-  loader.style.display = "none";
+  document.getElementById("loader").style.display = "none";
 });
 </script>
 </body>
 </html>
-
-
-
-
-
 
 
