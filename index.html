@@ -281,58 +281,58 @@ a.boton:hover {
 </div>
 
 <script>
-const loader = document.getElementById("loader");
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-if (id) { 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxnFGCN6rJvLbsm9IP_GkgaNSVhdMYlOgONvZFaQaRCPWChyS0veNSImiZQrPWqpJtmJA/exec"; 
+if (id) {
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzzXwBIArwt2FYthcQEpvRwIeeb-6iWeXczw6unUTlijG4l4fXl_FNkl2O1m1-oWbB3Gg/exec"; 
 
   fetch(`${scriptURL}?id=${id}`)
     .then(res => res.json())
     .then(data => {
       if (data.error) { alert(data.error); return; }
 
-      // WhatsApp
       if (data.celular) {
         const celularStr = data.celular.toString().replace(/\D/g,'');
         const btnWhatsapp = document.getElementById("btn-whatsapp");
         btnWhatsapp.href = `https://wa.me/57${celularStr}?text=Hola, necesito ayuda con un pedido`;
         btnWhatsapp.classList.remove("disabled");
-
-        btnWhatsapp.addEventListener("click", function(e) {
-          e.preventDefault();
-          loader.style.display = "flex"; // mostrar loader solo al click
-          
-          const link = this.href;
-          setTimeout(() => window.location.href = link, 1000);
-        });
       }
 
-      // Formulario
       if (data.correo_electronico) {
         const btnFormulario = document.getElementById("btn-formulario");
         btnFormulario.href = `https://cathsanchez6.github.io/PruebaEntrega_QREstatico/?id=${id}&correo=${data.correo_electronico}`;
         btnFormulario.classList.remove("disabled");
-
-        btnFormulario.addEventListener("click", function(e) {
-          e.preventDefault();
-          loader.style.display = "flex"; // mostrar loader solo al click
-          const link = this.href;
-          setTimeout(() => window.location.href = link, 1000);
-        });
       }
+
+      // Evento de loader en ambos botones habilitados
+      document.querySelectorAll("a.boton").forEach(btn => {
+        if (!btn.classList.contains("disabled")) {
+          btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const loader = document.getElementById("loader");
+            loader.style.display = "flex";
+            const link = btn.getAttribute("href");
+            setTimeout(() => {
+              window.location.href = link;
+            }, 1000);
+          });
+        }
+      });
     })
     .catch(err => console.error("Error cargando datos:", err));
 }
 
-// Cerrar loader con X
+// Botón ❌ para cancelar y recargar la página
 document.getElementById("cancel-loader").addEventListener("click", () => {
-  loader.style.display = "none";
+  document.getElementById("loader").style.display = "none";
+  location.reload();
 });
 </script>
 </body>
 </html>
+
+
 
 
 
