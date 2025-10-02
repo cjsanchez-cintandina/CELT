@@ -13,6 +13,8 @@
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #FFFFFF;
+  background-size: cover;
+  background-repeat: no-repeat;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,6 +22,7 @@
   overflow-x: hidden;
 }
 
+/* Contenedor principal */
 .contenedor-principal {
   max-width: 600px; 
   margin: 0 auto;
@@ -30,12 +33,14 @@
   z-index: 10;
 }
 
+/* Logo */
 .logo img { 
   width: 200px; 
   height: auto; 
   object-fit: cover;
 }
 
+/* Marco de contenido */
 .contenedor-marco {
   background-color: white;
   border: 2px solid #d1dceb;
@@ -49,6 +54,7 @@
   align-items: center;
 }
 
+/* Marco superior */
 .contenedor-marco2 {
   background-color: #FFFFFF;
   width: 100%;                 
@@ -65,6 +71,7 @@
   line-height: 1.4;
 }
 
+/* Texto dentro de marcos */
 .campo-dato { 
   margin-bottom: 12px; 
   font-size: 18px; 
@@ -72,6 +79,7 @@
   text-align: justify;
 }
 
+/* Botones */
 a.boton {
   display: flex;                   
   align-items: center;            
@@ -107,7 +115,9 @@ a.boton:hover {
   background-color: #2c6d00;
 }
 
+/* Texto genérico */
 .texto-justificado { 
+  justify-content: flex-start;
   font-size: 22px;
   color: #647e87;
   line-height: 1.6;
@@ -116,6 +126,7 @@ a.boton:hover {
 }
 
 .texto-justificado2 {
+  justify-content: flex-start;
   font-size: 16px;
   color: #647e87;
   line-height: 1.6;
@@ -123,15 +134,16 @@ a.boton:hover {
   text-align: center;
 }
 
-/* Loader oculto al inicio */
+/* Loader Overlay - oculto por defecto */
 .loader-overlay {
-  display: none; 
+  display: none; /* oculto al inicio */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(255,255,255,0.8);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -155,6 +167,7 @@ a.boton:hover {
   font-weight: bold;
 }
 
+/* Botón de cerrar loader */
 .close-btn {
   position: absolute;
   top: 10px; 
@@ -171,27 +184,67 @@ a.boton:hover {
   transform: scale(1.2);
 }
 
-/* --- Pantallas pequeñas --- */
+/* --- SOLO EN PANTALLAS PEQUEÑAS --- */
 @media (max-width: 700px) {
-  .logo img { width: 105px; }
-  .contenedor-marco { 
-    padding: 12px; 
-    margin: 4px 20px; 
-    max-width: calc(100% - 40px); 
+  body {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 10px;
   }
-  .contenedor-marco2 { font-size: 15px; line-height: 1.2; padding: 4px 8px; min-height: 0; }
-  .campo-dato { font-size: 14px; line-height: 1.4; margin: 1px 10px; }
-  .texto-justificado { font-size: 15px; }
-  .texto-justificado2 { font-size: 12px; }
-  a.boton { min-height: 80px; font-size: 16px; padding: 0 12px; border-radius: 50px; }
-  a.boton img.icono-caja { width: 47px; }
+  .contenedor-principal {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    margin: 2px;
+  }
+  .logo img { 
+   width: 105px;
+  }
+  .contenedor-marco { 
+   padding: 12px; 
+   margin: 4px 20px; 
+   max-width: calc(100% - 40px); 
+  }
+  .contenedor-marco2 {
+    min-height: 0;         
+    padding: 4px 8px;     
+    font-size: 15px;      
+    line-height: 1.2; 
+  }
+  .campo-dato { 
+   font-size: 14px; 
+   line-height: 1.4;
+   text-align: start;
+   margin: 1px 10px;
+  }
+  .texto-justificado { 
+   font-size: 15px;
+  }
+  .texto-justificado2 { 
+   font-size: 12px;
+  }
+  a.boton { 
+   min-height: 80px; 
+   font-size: 16px; 
+   padding: 0 12px; 
+   border-radius: 50px; 
+  }
+  a.boton img.icono-caja { 
+   width: 47px; 
+  }
 }
 </style>
 </head>
 <body>
-   <div class="contenedor-marco2">
-     <div class="texto-justificado">Bienvenido(a)</div>
-   </div>
+
+<div class="contenedor-marco2">
+  <div class="texto-justificado">Bienvenido(a)</div>
+</div>
 
 <div class="contenedor-principal">
   <div class="logo">
@@ -210,6 +263,7 @@ a.boton:hover {
   </a>
 </div>
   
+<br>
 <div class="contenedor-marco">
   <div class="campo-dato">En caso de alguna pregunta, sugerencia o si requiere comunicarse con nosotros, hacer clic en el botón "Inquietudes y sugerencias".</div>
   <a class="boton disabled" id="btn-whatsapp" href="#" target="_blank">
@@ -218,6 +272,7 @@ a.boton:hover {
   </a>
 </div>
 
+<br><br>
 <div class="texto-justificado2">Diseñado por <b>Cintandina S.A.</b></div>
 
 <!-- Loader -->
@@ -229,12 +284,6 @@ a.boton:hover {
 
 <script>
 const loader = document.getElementById("loader");
-
-// Ocultar loader al abrir la página
-window.addEventListener("load", () => {
-  loader.style.display = "none";
-});
-
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
@@ -246,30 +295,34 @@ if (id) {
     .then(data => {
       if (data.error) { alert(data.error); return; }
 
+      // WhatsApp
       if (data.celular) {
         const celularStr = data.celular.toString().replace(/\D/g,'');
         const btnWhatsapp = document.getElementById("btn-whatsapp");
         btnWhatsapp.href = `https://wa.me/57${celularStr}?text=Hola, necesito ayuda con un pedido`;
         btnWhatsapp.classList.remove("disabled");
+
+        btnWhatsapp.addEventListener("click", function(e) {
+          e.preventDefault();
+          loader.style.display = "flex";
+          const link = btnWhatsapp.getAttribute("href");
+          setTimeout(() => window.location.href = link, 1000);
+        });
       }
 
+      // Formulario
       if (data.correo_electronico) {
         const btnFormulario = document.getElementById("btn-formulario");
         btnFormulario.href = `https://cathsanchez6.github.io/PruebaEntrega_QREstatico/?id=${id}&correo=${data.correo_electronico}`;
         btnFormulario.classList.remove("disabled");
-      }
 
-      // Evento loader para ambos botones
-      document.querySelectorAll("a.boton").forEach(btn => {
-        if (!btn.classList.contains("disabled")) {
-          btn.addEventListener("click", function(e) {
-            e.preventDefault();
-            loader.style.display = "flex"; // mostrar loader
-            const link = btn.getAttribute("href");
-            setTimeout(() => window.location.href = link, 1000);
-          });
-        }
-      });
+        btnFormulario.addEventListener("click", function(e) {
+          e.preventDefault();
+          loader.style.display = "flex";
+          const link = btnFormulario.getAttribute("href");
+          setTimeout(() => window.location.href = link, 1000);
+        });
+      }
     })
     .catch(err => console.error("Error cargando datos:", err));
 }
@@ -281,6 +334,7 @@ document.getElementById("cancel-loader").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
