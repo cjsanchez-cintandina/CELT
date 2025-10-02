@@ -84,7 +84,7 @@ a.boton {
   display: flex;                   
   align-items: center;            
   justify-content: center;        
-  gap: 12px;                       
+  gap: 12px;                        
   width: 100%;  
   max-width: 500px; 
   min-height: 100px;
@@ -286,7 +286,7 @@ const loader = document.getElementById("loader");
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-if (id) {
+if (id) { 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxnFGCN6rJvLbsm9IP_GkgaNSVhdMYlOgONvZFaQaRCPWChyS0veNSImiZQrPWqpJtmJA/exec"; 
 
   fetch(`${scriptURL}?id=${id}`)
@@ -301,10 +301,9 @@ if (id) {
         btnWhatsapp.href = `https://wa.me/57${celularStr}?text=Hola, necesito ayuda con un pedido`;
         btnWhatsapp.classList.remove("disabled");
 
-        // Mostrar loader solo al presionar
         btnWhatsapp.addEventListener("click", function(e) {
           e.preventDefault();
-          loader.style.display = "flex";
+          loader.style.display = "flex"; // mostrar loader solo al click
           const link = this.href;
           setTimeout(() => window.location.href = link, 1000);
         });
@@ -318,28 +317,21 @@ if (id) {
 
         btnFormulario.addEventListener("click", function(e) {
           e.preventDefault();
-          loader.style.display = "flex";
+          loader.style.display = "flex"; // mostrar loader solo al click
           const link = this.href;
           setTimeout(() => window.location.href = link, 1000);
         });
       }
     })
-    .catch(err => {
-       console.error("Error cargando datos:", err);
-     });
+    .catch(err => console.error("Error cargando datos:", err));
 }
 
 // Cerrar loader con X
 document.getElementById("cancel-loader").addEventListener("click", () => {
   loader.style.display = "none";
 });
-
 </script>
 </body>
 </html>
-
-
-
-
 
 
