@@ -286,7 +286,7 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 if (id) {
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzzXwBIArwt2FYthcQEpvRwIeeb-6iWeXczw6unUTlijG4l4fXl_FNkl2O1m1-oWbB3Gg/exec"; 
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxnFGCN6rJvLbsm9IP_GkgaNSVhdMYlOgONvZFaQaRCPWChyS0veNSImiZQrPWqpJtmJA/exec"; 
 
   fetch(`${scriptURL}?id=${id}`)
     .then(res => res.json())
@@ -331,5 +331,6 @@ document.getElementById("cancel-loader").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
